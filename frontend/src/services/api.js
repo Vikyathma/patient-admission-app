@@ -1,6 +1,5 @@
 // API helper. Base URL comes from VITE_API_URL (falls back to the local backend).
-const BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || "/api";
 // Turns backend error bodies into one readable message.
 // Our backend sends {"detail": "text"}; FastAPI's default is a list of {msg}.
 function parseError(body, status) {
@@ -15,7 +14,7 @@ function parseError(body, status) {
 async function request(path, options = {}) {
   let res;
   try {
-    res = await fetch(`${BASE_URL}${path}`, {
+    res = await fetch(`${API_BASE_URL}${path}`, {
       headers: { "Content-Type": "application/json" },
       ...options,
     });
